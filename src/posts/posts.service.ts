@@ -19,4 +19,8 @@ export class PostsService {
   put(id: number, updatePost: UpdatePosts) {
     return;
   }
+
+  delete(id: number) {
+    return;
+  }
 }

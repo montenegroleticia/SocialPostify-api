@@ -26,8 +26,8 @@ export class PublicationsService {
     return await this.publicationsRepository.post(createPublication);
   }
 
-  async get() {
-    return await this.publicationsRepository.get();
+  async get(published?: string, after?: Date) {
+    return await this.publicationsRepository.get(published, after);
   }
 
   async getById(id: number) {

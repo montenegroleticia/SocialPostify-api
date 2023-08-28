@@ -8,6 +8,7 @@ import {
   Delete,
   HttpException,
   HttpStatus,
+  Query,
 } from '@nestjs/common';
 import { PublicationsService } from './publications.service';
 import { CreatePublications } from './dtos/CreatePublications';
@@ -27,7 +28,7 @@ export class PublicationsController {
   }
 
   @Get()
-  get() {
+  get(@Query('published') published?: string, @Query('after') after?: Date) {
     try {
       return this.publicationsService.get();
     } catch (error) {

@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   Post,
   Put,
@@ -17,26 +19,46 @@ export class PostsController {
 
   @Post()
   post(@Body() createPost: CreatePosts) {
-    return this.postsService.post(createPost);
+    try {
+      return this.postsService.post(createPost);
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Get()
   get() {
-    return this.postsService.get();
+    try {
+      return this.postsService.get();
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Get(':id')
   getById(@Param('id') id: string) {
-    return this.postsService.getById(+id);
+    try {
+      return this.postsService.getById(+id);
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Put(':id')
   put(@Param('id') id: string, @Body() updatePost: UpdatePosts) {
-    return this.postsService.put(+id, updatePost);
+    try {
+      return this.postsService.put(+id, updatePost);
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Delete(':id')
   delete(@Param('id') id: string) {
-    return this.postsService.delete(+id);
+    try {
+      return this.postsService.delete(+id);
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 }

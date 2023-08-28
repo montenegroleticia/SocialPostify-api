@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   Post,
   Put,
@@ -17,26 +19,46 @@ export class MediasController {
 
   @Post()
   post(@Body() CreateMedia: CreateMedias) {
-    return this.mediasService.post(CreateMedia);
+    try {
+      return this.mediasService.post(CreateMedia);
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Get()
   get() {
-    return this.mediasService.get();
+    try {
+      return this.mediasService.get();
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Get(':id')
   getById(@Param('id') id: string) {
-    return this.mediasService.getById(+id);
+    try {
+      return this.mediasService.getById(+id);
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Put(':id')
   put(@Param('id') id: string, @Body() UpdateMedia: UpdateMedias) {
-    return this.mediasService.put(+id, UpdateMedia);
+    try {
+      return this.mediasService.put(+id, UpdateMedia);
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Delete(':id')
   delete(@Param('id') id: string) {
-    return this.mediasService.delete(+id);
+    try {
+      return this.mediasService.delete(+id);
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 }

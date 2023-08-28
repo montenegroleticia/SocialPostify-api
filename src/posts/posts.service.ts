@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePosts } from './dtos/CreatePosts';
 import { UpdatePosts } from './dtos/UpdatePosts';
 import { PostsRepository } from './posts.repository';
@@ -16,7 +16,9 @@ export class PostsService {
   }
 
   async getById(id: number) {
-    return await this.postRepository.getById(id);
+    const post = await this.postRepository.getById(id);
+    if (!post) throw new NotFoundException();
+    return post;
   }
 
   async put(id: number, updatePost: UpdatePosts) {

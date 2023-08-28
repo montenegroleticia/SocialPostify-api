@@ -6,6 +6,8 @@ import {
   Patch,
   Param,
   Delete,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { PublicationsService } from './publications.service';
 import { CreatePublications } from './dtos/CreatePublications';
@@ -17,26 +19,46 @@ export class PublicationsController {
 
   @Post()
   post(@Body() createPublication: CreatePublications) {
-    return this.publicationsService.post(createPublication);
+    try {
+      return this.publicationsService.post(createPublication);
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Get()
   get() {
-    return this.publicationsService.get();
+    try {
+      return this.publicationsService.get();
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Get(':id')
   getById(@Param('id') id: string) {
-    return this.publicationsService.getById(+id);
+    try {
+      return this.publicationsService.getById(+id);
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Patch(':id')
   put(@Param('id') id: string, @Body() updatePublication: UpdatePublications) {
-    return this.publicationsService.put(+id, updatePublication);
+    try {
+      return this.publicationsService.put(+id, updatePublication);
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Delete(':id')
   delete(@Param('id') id: string) {
-    return this.publicationsService.delete(+id);
+    try {
+      return this.publicationsService.delete(+id);
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 }

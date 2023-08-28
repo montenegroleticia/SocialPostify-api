@@ -7,6 +7,12 @@ import { UpdateMedias } from './dtos/UpdateMedias';
 export class MediasRepository {
   constructor(private readonly prisma: PrismaService) {}
 
+  async findMedia(data: CreateMedias) {
+    return this.prisma.medias.findFirst({
+      where: { title: data.title, username: data.username },
+    });
+  }
+
   async post(data: CreateMedias) {
     return this.prisma.medias.create({
       data,

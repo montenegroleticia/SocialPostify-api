@@ -1,26 +1,29 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePosts } from './dtos/CreatePosts';
 import { UpdatePosts } from './dtos/UpdatePosts';
+import { PostsRepository } from './posts.repository';
 
 @Injectable()
 export class PostsService {
-  post(CreatePost: CreatePosts) {
-    return;
+  constructor(private readonly postRepository: PostsRepository) {}
+
+  async post(CreatePost: CreatePosts) {
+    return await this.postRepository.post(CreatePost);
   }
 
-  get() {
-    return;
+  async get() {
+    return await this.postRepository.get();
   }
 
-  getById(id: number) {
-    return;
+  async getById(id: number) {
+    return await this.postRepository.getById(id);
   }
 
-  put(id: number, updatePost: UpdatePosts) {
-    return;
+  async put(id: number, updatePost: UpdatePosts) {
+    return await this.postRepository.put(id, updatePost);
   }
 
-  delete(id: number) {
-    return;
+  async delete(id: number) {
+    return await this.postRepository.delete(id);
   }
 }

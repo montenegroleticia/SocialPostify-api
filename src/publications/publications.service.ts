@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  NotFoundException,
+  forwardRef,
+} from '@nestjs/common';
 import { CreatePublications } from './dtos/CreatePublications';
 import { UpdatePublications } from './dtos/UpdatePublications';
 import { PublicationsRepository } from './publications.repository';
@@ -9,7 +14,9 @@ import { PostsService } from 'src/posts/posts.service';
 export class PublicationsService {
   constructor(
     private readonly publicationsRepository: PublicationsRepository,
+    @Inject(forwardRef(() => MediasService))
     private readonly mediasService: MediasService,
+    @Inject(forwardRef(() => PostsService))
     private readonly postsService: PostsService,
   ) {}
 
@@ -39,5 +46,13 @@ export class PublicationsService {
   async delete(id: number) {
     await this.getById(id);
     return await this.publicationsRepository.delete(id);
+  }
+
+  async getByMediaId(mediaId: number) {
+    return await this.publicationsRepository.getByMediaId(mediaId);
+  }
+
+  async getByPostId(postId: number) {
+    return await this.publicationsRepository.getByPostId(postId);
   }
 }

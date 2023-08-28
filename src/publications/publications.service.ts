@@ -1,26 +1,35 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePublications } from './dtos/CreatePublications';
 import { UpdatePublications } from './dtos/UpdatePublications';
+import { PublicationsRepository } from './publications.repository';
 
 @Injectable()
 export class PublicationsService {
-  post(createPublication: CreatePublications) {
-    return;
+  constructor(
+    private readonly publicationsRepository: PublicationsRepository,
+  ) {}
+
+  async post(createPublication: CreatePublications) {
+    return await this.publicationsRepository.post(createPublication);
   }
 
-  get() {
-    return;
+  async get() {
+    return await this.publicationsRepository.get();
   }
 
-  getById(id: number) {
-    return;
+  async getById(id: number) {
+    const publication = await this.publicationsRepository.getById(id);
+    if (!publication) throw new NotFoundException();
+    return publication;
   }
 
-  put(id: number, updatePublication: UpdatePublications) {
-    return;
+  async put(id: number, updatePublication: UpdatePublications) {
+    await this.getById(id);
+    return await this.publicationsRepository.put(id, updatePublication);
   }
 
-  delete(id: number) {
-    return;
+  async delete(id: number) {
+    await this.getById(id);
+    return await this.publicationsRepository.delete(id);
   }
 }

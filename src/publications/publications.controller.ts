@@ -3,12 +3,12 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   HttpException,
   HttpStatus,
   Query,
+  Put,
 } from '@nestjs/common';
 import { PublicationsService } from './publications.service';
 import { CreatePublications } from './dtos/CreatePublications';
@@ -45,7 +45,7 @@ export class PublicationsController {
     }
   }
 
-  @Patch(':id')
+  @Put(':id')
   put(@Param('id') id: string, @Body() updatePublication: UpdatePublications) {
     try {
       return this.publicationsService.put(+id, updatePublication);

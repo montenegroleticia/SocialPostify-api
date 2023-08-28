@@ -2,8 +2,8 @@ import { Module, forwardRef } from '@nestjs/common';
 import { MediasController } from './medias.controller';
 import { MediasService } from './medias.service';
 import { MediasRepository } from './medias.repository';
-import { PrismaModule } from 'src/prisma/prisma.module';
-import { PublicationsModule } from 'src/publications/publications.module';
+import { PrismaModule } from '../prisma/prisma.module';
+import { PublicationsModule } from '../publications/publications.module';
 
 @Module({
   controllers: [MediasController],

@@ -8,7 +8,7 @@ import {
 import { CreatePosts } from './dtos/CreatePosts';
 import { UpdatePosts } from './dtos/UpdatePosts';
 import { PostsRepository } from './posts.repository';
-import { PublicationsService } from 'src/publications/publications.service';
+import { PublicationsService } from '../publications/publications.service';
 
 @Injectable()
 export class PostsService {

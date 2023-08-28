@@ -9,7 +9,7 @@ import {
 import { MediasRepository } from './medias.repository';
 import { CreateMedias } from './dtos/CreateMedias';
 import { UpdateMedias } from './dtos/UpdateMedias';
-import { PublicationsService } from 'src/publications/publications.service';
+import { PublicationsService } from '../publications/publications.service';
 
 @Injectable()
 export class MediasService {
